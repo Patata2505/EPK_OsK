@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OsK - My Soul</title>
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #F5F5DC;
+            --primary-color: #1f1f1f;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --border-radius-lg: 22px;
+            --border-radius-md: 16px;
+            --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.18);
+            --shadow-light: 0 8px 22px rgba(0, 0, 0, 0.10);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: "Inter", sans-serif;
+            color: var(--primary-color);
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Animación general de entrada de la página */
+        .page-wrapper {
+            width: 100%;
+            max-width: 1100px;
+            padding: 32px 18px 48px;
+            opacity: 0;
+            animation: pageEnter 0.9s ease-out forwards;
+        }
+
+        @keyframes pageEnter {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeDown 0.9s ease-out forwards;
+        }
+
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header h1 {
+            font-family: "Playfair Display", serif;
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        header p {
+            opacity: 0.7;
+            margin-top: 6px;
+        }
+
+        /* MY SOUL */
+        .soul-title {
+            font-family: "Playfair Display", serif;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 2rem;
+            letter-spacing: 0.2em;
+            margin-bottom: 20px;
+        }
+
+        .soul-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .soul-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            height: 260px;
+            position: relative;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            opacity: 0;
+            animation: soulCardEnter 0.8s ease forwards;
+        }
+
+        .soul-card:nth-child(1) { animation-delay: 0.15s; }
+        .soul-card:nth-child(2) { animation-delay: 0.30s; }
+        .soul-card:nth-child(3) { animation-delay: 0.45s; }
+
+        @keyframes soulCardEnter {
+            from {
+                transform: translateY(25px) scale(0.97);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .soul-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease, filter 0.6s ease;
+        }
+
+        /* Overlay suave al hacer hover */
+        .soul-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top, rgba(255,255,255,0.35), transparent 55%);
+            mix-blend-mode: screen;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .soul-card:hover {
+            transform: translateY(-10px) scale(1.03) rotate(-0.5deg);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .soul-card:hover img {
+            transform: scale(1.08);
+            filter: saturate(1.2) contrast(1.05);
+        }
+
+        .soul-card:hover::before {
+            opacity: 1;
+        }
+
+        /* MUSIC */
+        .section-title {
+            font-family: "Playfair Display", serif;
+            font-size: 1.7rem;
+            margin-top: 40px;
+            margin-bottom: 10px;
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+
+        .section-subtitle {
+            opacity: 0.7;
+            margin-bottom: 20px;
+            animation: fadeUp 0.8s ease-out forwards;
+            animation-delay: 0.1s;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .music-card {
+            background: transparent;
+            box-shadow: none;
+            padding: 0;
+            margin-bottom: 40px;
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+
+        .music-card:nth-child(1) { animation-delay: 0.2s; }
+        .music-card:nth-child(2) { animation-delay: 0.3s; }
+
+        .music-label {
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            margin-bottom: 10px;
+        }
+
+        .music-card iframe {
+            width: 100%;
+            height: 200px;
+            border-radius: 16px;
+            border: none;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .music-card iframe:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* ABOUT */
+        .about-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-soft);
+            margin-top: 20px;
+            line-height: 1.6;
+            animation: fadeUp 0.9s ease-out forwards;
+            animation-delay: 0.25s;
+        }
+
+        .about-card h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .about-card p {
+            text-align: justify;
+            white-space: pre-line;
+        }
+
+        footer {
+            text-align: center;
+            opacity: 0.6;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-wrapper">
+
+        <header>
+            <h1>OsK</h1>
+            <p>My soul, my music, my story.</p>
+        </header>
+
+        <!-- MY SOUL -->
+        <section>
+            <h2 class="soul-title">My Soul</h2>
+
+            <div class="soul-grid">
+                <!-- 1: Tu selfie -->
+                <div class="soul-card">
+                    <img src="mysoul-1.jpg" alt="OsK">
+                </div>
+
+                <!-- 2: Ilustración en el metro -->
+                <div class="soul-card">
+                    <img src="mysoul-2.jpg" alt="Arte OsK">
+                </div>
+
+                <!-- 3: Nube anaranjada -->
+                <div class="soul-card">
+                    <img src="mysoul-3.jpg" alt="Cielo y nubes">
+                </div>
+            </div>
+        </section>
+
+        <!-- MUSIC -->
+        <section class="music-section">
+            <h2 class="section-title">Music</h2>
+            <p class="section-subtitle">Algunas de las piezas que marcan mi camino.</p>
+
+            <div class="music-card">
+                <div class="music-label">Eco</div>
+                <iframe src="https://open.spotify.com/embed/track/6TNpzcQZAs9TzFUWUjcp7b?utm_source=generator"
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+            </div>
+
+            <div class="music-card">
+                <div class="music-label">Difícil de Querer</div>
+                <iframe src="https://open.spotify.com/embed/track/7dmFofdcWUXogiZWw02vrW?utm_source=generator"
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section class="about-section">
+            <div class="about-card">
+                <h2>Acerca de mí</h2>
+                <p>
+Soy Oscar Uriel, mejor conocido como OsK, un artista de Monterrey, Nuevo León.
+Mi camino en la música comenzó una noche de diciembre escuchando “Armagedon” de Humbe; esa vibra me empujó a escribir por primera vez. Con el tiempo descubrí que no era solo inspiración: también había dudas, miedos y la sensación de quedarme atrás.
+
+Luego conocí a NSQK, alguien de mi propio estado que me mostró otro nivel de la música y me motivó a entrar al mundo de la producción, donde entendí que nada es tan fácil como parece.
+Meses después, un viernes de julio, la vida me cruzó con Felipe, quien se convirtió en una pieza clave para que mis sueños tomaran forma.
+
+Actualmente me encuentro trabajando con un sello discografico llamado Medellin Records que me a apoyado desde mis inicios con ¨Eco¨ y ¨ Dificil de Querer¨ estoy muy agradecidos con ellos, estamos haciendo el 3er tema de mi carrea y tengo demasiadas ganas de que ya puedan escucharlo
+
+Mi misión es conectar con personas que sienten lo mismo que yo sentí: ruido interno, sueños enormes y miedo de no lograrlo.
+Quiero que mi música sea un abrazo, un recordatorio de que nadie está solo y de que siempre hay un camino.
+
+Hoy sigo escribiendo recordando de dónde vengo y hacia dónde voy.
+Yo soy OsK, y esto apenas comienza.
+                </p>
+            </div>
+        </section>
+
+        <footer>
+            © <span id="year"></span> OsK · Medellín Records
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>
